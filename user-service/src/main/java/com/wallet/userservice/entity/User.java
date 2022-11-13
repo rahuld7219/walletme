@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Builder
+@Builder // for builder we need noarg and allarg constructors
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
