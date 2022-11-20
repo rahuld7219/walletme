@@ -35,9 +35,15 @@ public class Wallet {
      */
     private Double balance;
 
+    /**
+     * Automatically saves create time when the tuple get created.
+     */
     @CreationTimestamp
     private Date createdOn;
 
+    /**
+     * Automatically saves update time whenever the tuple data get updated.
+     */
     @UpdateTimestamp
     private Date updatedOn;
 

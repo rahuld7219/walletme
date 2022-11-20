@@ -41,7 +41,9 @@ public class KafkaConsumerConfig {
          * TODO: extract below code
          */
         Wallet wallet = Wallet.builder()
-                .userId((Long) payload.get("userId"))
+                .userId(Long.valueOf((Integer) payload.get("userId"))) // while deserializing json to object,
+                                                                        // json numbers converted as Integer,
+                                                                        // even though before serialization it was Long in our case.
                 .email((String) payload.get("email"))
                 .balance(100.00).build();
 
