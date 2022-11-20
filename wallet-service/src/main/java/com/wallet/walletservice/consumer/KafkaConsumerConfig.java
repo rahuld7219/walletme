@@ -29,7 +29,7 @@ public class KafkaConsumerConfig {
     @KafkaListener(topics = "USER_CREATED", groupId = "wallet-service") // we are giving groupId as we don't want this
                                                                         // message to be consumed by 2 wallet-service as we will
                                                                         // have multiple instances of wallet-service running
-    public void listenKafkaTopic(String message) throws JsonProcessingException { // as we have pushed the message in json string form in kafka,
+    public void listenUserCreatedTopic(String message) throws JsonProcessingException { // as we have pushed the message in json string form in kafka,
                                                                                     // so we can take it as String
         logger.info("Consuming: {}", message);
 

@@ -6,7 +6,8 @@
 	<modules>
 		<module>user-service</module>
 		<module>wallet-service</module>
-	</modules>
+        <module>notification-service</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
