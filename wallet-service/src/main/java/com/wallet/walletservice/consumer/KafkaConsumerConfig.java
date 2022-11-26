@@ -49,4 +49,12 @@ public class KafkaConsumerConfig {
 
         walletRepo.save(wallet);
     }
+
+    @KafkaListener(topics = "TRANSACTION_INIT", groupId = "wallet-service")
+    public void listenTransactionInitTopic(String message) throws JsonProcessingException {
+        logger.info("Consuming: {}", message);
+
+        // TODO: handle object mapper's exception using try catch
+        Map<String, Object> payload = objectMapper.readValue(message, Map.class);
+    }
 }

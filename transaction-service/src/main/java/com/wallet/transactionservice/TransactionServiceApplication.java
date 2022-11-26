@@ -1,4 +1,4 @@
-package com.wallet.userservice;
+package com.wallet.transactionservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
@@ -6,15 +6,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class UserServiceApplication {
+public class TransactionServiceApplication {
 
-    @Bean // TODO: create this in a separate config file
+    // TODO: create this in a separate config file
+    @Bean
     public ObjectMapper getObjectMapper() {
         return new ObjectMapper();
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(UserServiceApplication.class, args);
+        SpringApplication.run(TransactionServiceApplication.class, args);
     }
-    // difference between SpringApplication and SpringBootApplication which to use??
 }
