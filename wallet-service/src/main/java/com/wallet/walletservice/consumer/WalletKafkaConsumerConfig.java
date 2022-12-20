@@ -11,12 +11,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class KafkaConsumerConfig {
+public class WalletKafkaConsumerConfig {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -24,7 +23,7 @@ public class KafkaConsumerConfig {
     @Autowired
     private WalletRepo walletRepo;
 
-    public static Logger logger = LoggerFactory.getLogger(KafkaConsumerConfig.class);
+    public static Logger logger = LoggerFactory.getLogger(WalletKafkaConsumerConfig.class);
 
     @KafkaListener(topics = "USER_CREATED", groupId = "wallet-service") // we are giving groupId as we don't want this
                                                                         // message to be consumed by 2 wallet-service as we will
