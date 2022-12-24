@@ -14,6 +14,7 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -40,12 +41,13 @@ public class TransactionService {
      */
     // TODO: make this transactional and handle problems like what if connection to Kafka broker not established,
     //  then don't allow creating entry in database
-    public Long doTransaction(TransactionRequestDTO transactionRequestDTO) throws JsonProcessingException, ExecutionException, InterruptedException {
+    public String doTransaction(TransactionRequestDTO transactionRequestDTO) throws JsonProcessingException, ExecutionException, InterruptedException {
         Transaction transaction = Transaction.builder()
                 .fromUserId(transactionRequestDTO.getFromUserId())
                 .toUserId(transactionRequestDTO.getToUserId())
                 .amount((transactionRequestDTO.getAmount()))
                 .status(TransactionStatus.PENDING)
+                .txnId(UUID.randomUUID().toString())
                 .build();
 
         transactionRepo.save(transaction);
@@ -57,10 +59,10 @@ public class TransactionService {
 
         logger.info("Pushed to topic: {}, kafka response: {}", transactionInitTopic, kafkaResponseFuture.get());// TODO: handle exception of future.get() using try-catch
 
-        return transaction.getId();
+        return transaction.getTxnId();
     }
 
-    public String checkStatus(Long transactionId) {
-        return transactionRepo.findById(transactionId).get().getStatus().name();
+    public String checkStatus(String transactionId) {
+        return transactionRepo.findByTxnId(transactionId).getStatus().name();
     }
 }

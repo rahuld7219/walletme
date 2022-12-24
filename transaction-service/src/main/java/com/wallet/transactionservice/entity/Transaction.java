@@ -20,6 +20,12 @@ public class Transaction {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    // we use UUID for this and provide it to check transaction status, as publicly exposed API should not use number
+    // that could be easily guessed, we have not returned the id as then
+    // anyone can take that number and can see other transactions also simply by just incrementing/decrementing the number.
+    @Column(unique = true, nullable = false)
+    private String txnId;
+
     @Column(nullable = false)
     private Long fromUserId;
 

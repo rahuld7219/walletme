@@ -23,5 +23,10 @@ public class UserController {
     public ResponseEntity<Long> createUser(@RequestBody UserCreationRequestDTO userCreationRequestDTO) throws JsonProcessingException, ExecutionException, InterruptedException {
         Long userId = userService.createUser(userCreationRequestDTO);
         return ResponseEntity.ok(userId);
+
+        //TODO: store the user profile data in Redis
     }
+
+    // TODO: create an API to fetch user profile data, and serve that data from the Redis instead of the database
+    // @GetMapping("/profile")
 }
