@@ -46,4 +46,26 @@ public class NotificationKafkaConsumerConfig {
 
         logger.info("Email sent to {}", email);
     }
+
+    @KafkaListener(topics = "WALLET_UPDATED", groupId = "notification-email-service")
+    public void sendWalletUpdateEmail(String message) throws JsonProcessingException {
+
+        // TODO: handle object mapper's exception using try catch
+        Map<String, Object> payload = objectMapper.readValue(message, Map.class);
+        logger.info("Data from WALLET_UPDATED topic : {}", payload);
+
+        String email = (String) payload.get("email");
+        Double balance = (Double) payload.get("balance");
+
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("rahuld7219@gmail.com");
+        simpleMailMessage.setTo(email);
+        simpleMailMessage.setSubject("Wallet Update!!");
+        simpleMailMessage.setText("Hi, Your updated wallet balance is " + balance + "Happy walletMeeeing :)");
+//        simpleMailMessage.setCc("<--cc:emailIds-->");
+
+        javaMailSender.send(simpleMailMessage);
+
+        logger.info("Email sent to {}", email);
+    }
 }

@@ -59,4 +59,8 @@ public class TransactionService {
 
         return transaction.getId();
     }
+
+    public String checkStatus(Long transactionId) {
+        return transactionRepo.findById(transactionId).get().getStatus().name();
+    }
 }

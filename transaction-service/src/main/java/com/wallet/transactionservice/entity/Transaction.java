@@ -30,7 +30,7 @@ public class Transaction {
     private Double amount;
 
     @Enumerated(EnumType.STRING) // with this annotation, it does not save the status in ordinal form but in the string form in the database
-    TransactionStatus status;
+    private TransactionStatus status;
 
     @CreationTimestamp
     private Date createdOn;
